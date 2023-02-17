@@ -35,37 +35,39 @@ export default function RightSidebar() {
 
   return (
     <Box flex={2} sx={{ display: { xs: "none", sm: "block" } }}>
-      <Stack direction="column" justifyContent="center">
-        <Typography variant="h4" textAlign="center" m="1vw">
-          All users:
-        </Typography>
-        <AvatarGroup max={4} sx={{ margin: "2vw" }}>
-          {avatarGroup}
-        </AvatarGroup>
+      <Box position="fixed">
+        <Stack direction="column" justifyContent="center">
+          <Typography variant="h4" textAlign="center" m="1vw">
+            All users:
+          </Typography>
+          <AvatarGroup max={4} sx={{ margin: "2vw" }}>
+            {avatarGroup}
+          </AvatarGroup>
 
-        <Card sx={{ margin: "1vw" }} elevation={5}>
-          <CardContent>
-            <Stack direction="column" justifyContent="center">
-              <Typography variant="h5" textAlign="center" m="1vw">
-                Informations:
-              </Typography>
-              <Typography variant="p" textAlign="center" m="1vw">
-                LetsGeddIt is a social media app, where you can share your
-                thoughts with your friends and other people.
-              </Typography>
-              <Typography variant="p" textAlign="center" m="1vw">
-                To find people go to users tab.
-              </Typography>
-              <Typography variant="p" textAlign="center" m="1vw">
-                To see posts go to home tab.
-              </Typography>
-              <Typography variant="p" textAlign="center" m="1vw">
-                To add posts click add Post
-              </Typography>
-            </Stack>
-          </CardContent>
-        </Card>
-      </Stack>
+          <Card sx={{ margin: "1vw" }} elevation={5}>
+            <CardContent>
+              <Stack direction="column" justifyContent="center">
+                <Typography variant="h5" textAlign="center" m="1vw">
+                  Informations:
+                </Typography>
+                <Typography variant="p" textAlign="center" m="1vw">
+                  LetsGeddIt is a social media app, where you can share your
+                  thoughts with your friends and other people.
+                </Typography>
+                <Typography variant="p" textAlign="center" m="1vw">
+                  To find people go to users tab.
+                </Typography>
+                <Typography variant="p" textAlign="center" m="1vw">
+                  To see posts go to home tab.
+                </Typography>
+                <Typography variant="p" textAlign="center" m="1vw">
+                  To add posts click add Post
+                </Typography>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Stack>
+      </Box>
     </Box>
   );
 }
