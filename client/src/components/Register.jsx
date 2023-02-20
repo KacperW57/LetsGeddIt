@@ -31,12 +31,12 @@ export default function Register() {
 
   useEffect(() => {
     pwdColor();
-  }, [form]);
+  });
 
   async function handleSubmit(e) {
     if (form.password === form.repeatPassword) {
       e.preventDefault();
-      await fetch("http://localhost:5000/register", {
+      const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,16 +46,21 @@ export default function Register() {
         window.alert(error);
         return;
       });
-      localStorage.setItem("login", form.login);
-      setForm({
-        login: "",
-        email: "",
-        password: "",
-        repeatPassword: "",
-      });
-      console.log("Account added!");
+      console.log(response);
+      if (response.ok) {
+        localStorage.setItem("login", form.login);
+        setForm({
+          login: "",
+          email: "",
+          password: "",
+          repeatPassword: "",
+        });
+        console.log("Account added!");
 
-      navigate("/mainSite/posts");
+        navigate("/mainSite/posts");
+      } else if (!response.ok) {
+        alert("Login already taken!");
+      }
     } else {
       alert("Passwords are not matching!");
     }
@@ -167,6 +172,15 @@ export default function Register() {
                       sx={{ margin: "1vw" }}
                     >
                       Register
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      sx={{ margin: "1vw" }}
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Back to login screen
                     </Button>
                   </Stack>
                 </form>

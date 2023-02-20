@@ -26,13 +26,12 @@ export default function RightSidebar() {
     }
 
     getUsers();
-    console.log(users);
     return;
-  }, [users]);
+  }, [users.length]);
+
   const avatarGroup = users.map((user) => {
     return <Avatar>{user.login.charAt(0)}</Avatar>;
   });
-
   return (
     <Box flex={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Box position="fixed">
@@ -43,7 +42,6 @@ export default function RightSidebar() {
           <AvatarGroup max={4} sx={{ margin: "2vw" }}>
             {avatarGroup}
           </AvatarGroup>
-
           <Card sx={{ margin: "1vw" }} elevation={5}>
             <CardContent>
               <Stack direction="column" justifyContent="center">

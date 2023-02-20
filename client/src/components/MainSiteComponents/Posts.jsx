@@ -20,9 +20,8 @@ export default function Posts(props) {
     }
 
     getPosts();
-    console.log(posts);
     return;
-  });
+  }, [posts.length]);
   const postsList = posts.map((post) => {
     return (
       <Card key={post._id} sx={{ width: "100%", margin: "1vw" }} elevation={8}>

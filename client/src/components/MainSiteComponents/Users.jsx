@@ -1,14 +1,16 @@
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Stack,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Users() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -25,9 +27,9 @@ export default function Users() {
     }
 
     getUsers();
-    console.log(users);
+
     return;
-  });
+  }, [users.length]);
 
   const usersList = users.map((user) => {
     return (
@@ -48,6 +50,14 @@ export default function Users() {
               <Typography variant="p" fontWeight={300} m="1vw">
                 {user.registration_date}
               </Typography>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate(`/mainSite/users/${user._id}`);
+                }}
+              >
+                User page
+              </Button>
             </Stack>
           </Stack>
           <Typography m="2vw">{user.user}</Typography>
