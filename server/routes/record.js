@@ -122,7 +122,7 @@ recordRoutes.route("/users").get(async function (req, response) {
     });
 });
 
-//Getting single user with id
+//Getting single user
 recordRoutes.route("/users/:id").get(async function (req, response) {
   let db_connect = dbo.getDb();
   myquery = {
@@ -139,14 +139,14 @@ recordRoutes.route("/users/:id").get(async function (req, response) {
     });
 });
 
-//Getting single user with login
-recordRoutes.route("/users/:login").get(async function (req, response) {
+//Getting single post
+recordRoutes.route("/posts/:id").get(async function (req, response) {
   let db_connect = dbo.getDb();
   myquery = {
-    login: req.params.login,
+    _id: new ObjectId(req.params.id),
   };
   db_connect
-    .collection("users")
+    .collection("posts")
     .findOne(myquery, function (err, res) {
       if (err) throw err;
     })

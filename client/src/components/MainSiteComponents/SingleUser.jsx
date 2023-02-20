@@ -83,7 +83,7 @@ export default function SingleUser() {
                   variant="extended"
                   sx={{
                     position: "absolute",
-                    left: "1vw",
+                    right: "1vw",
                     top: "1vw",
                   }}
                   onClick={() => {

@@ -1,9 +1,18 @@
-import { Typography, Box, Card, CardContent, Avatar } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Card,
+  CardContent,
+  Avatar,
+  Button,
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Posts(props) {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -39,6 +48,16 @@ export default function Posts(props) {
             </Typography>
           </Stack>
           <Typography m="2vw">{post.post}</Typography>
+          <Stack justifyContent="center" alignItems="center">
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate(`/mainSite/posts/${post._id}`);
+              }}
+            >
+              Post page
+            </Button>
+          </Stack>
         </CardContent>
       </Card>
     );
