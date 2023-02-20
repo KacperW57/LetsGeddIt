@@ -15,6 +15,9 @@ recordRoutes.route("/register").post(async function (req, response) {
   const formattedDate = DateTime.fromJSDate(date).toLocaleString(
     DateTime.DATETIME_MED
   );
+  let myquery = {
+    login: req.body.login,
+  };
   let myobj = {
     login: req.body.login,
     email: req.body.email,
@@ -23,13 +26,25 @@ recordRoutes.route("/register").post(async function (req, response) {
   };
   db_connect
     .collection("users")
-    .insertOne(myobj, function (err, res) {
+    .findOne(myquery, function (err, res) {
       if (err) throw err;
-      response.json(res);
     })
     .then((data) => {
       console.log(data);
-      response.json(data);
+      if (data !== null) {
+        response.sendStatus(403);
+      } else if (data === null) {
+        db_connect
+          .collection("users")
+          .insertOne(myobj, function (err, res) {
+            if (err) throw err;
+            response.json(res);
+          })
+          .then((data) => {
+            console.log(data);
+            response.sendStatus(200);
+          });
+      }
     });
 });
 
@@ -77,7 +92,6 @@ recordRoutes.route("/addPost").post(async function (req, response) {
       response.json(res);
     })
     .then((data) => {
-      console.log(data);
       response.json(data);
     });
 });
@@ -91,7 +105,6 @@ recordRoutes.route("/posts").get(async function (req, response) {
     .sort({ _id: -1 })
     .toArray()
     .then((data) => {
-      console.log(data);
       response.json(data);
     });
 });
@@ -104,6 +117,39 @@ recordRoutes.route("/users").get(async function (req, response) {
     .find({})
     .sort({ _id: -1 })
     .toArray()
+    .then((data) => {
+      response.json(data);
+    });
+});
+
+//Getting single user with id
+recordRoutes.route("/users/:id").get(async function (req, response) {
+  let db_connect = dbo.getDb();
+  myquery = {
+    _id: new ObjectId(req.params.id),
+  };
+  db_connect
+    .collection("users")
+    .findOne(myquery, function (err, res) {
+      if (err) throw err;
+    })
+    .then((data) => {
+      console.log(data);
+      response.json(data);
+    });
+});
+
+//Getting single user with login
+recordRoutes.route("/users/:login").get(async function (req, response) {
+  let db_connect = dbo.getDb();
+  myquery = {
+    login: req.params.login,
+  };
+  db_connect
+    .collection("users")
+    .findOne(myquery, function (err, res) {
+      if (err) throw err;
+    })
     .then((data) => {
       console.log(data);
       response.json(data);
