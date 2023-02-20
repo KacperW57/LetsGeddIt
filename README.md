@@ -19,6 +19,14 @@ To run the app:
 - use "npm install" command
 - use "npm start" command to start react app
 
+You can log in with:
+
+Login: Admin
+
+Password: Nimda
+
+Feel free to make your own account and add some posts
+
 ## Languages and tools used
 
 ### Languages:
