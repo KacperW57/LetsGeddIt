@@ -30,7 +30,7 @@ export default function RightSidebar() {
   }, [users.length]);
 
   const avatarGroup = users.map((user) => {
-    return <Avatar>{user.login.charAt(0)}</Avatar>;
+    return <Avatar key={user._id}>{user.login.charAt(0)}</Avatar>;
   });
   return (
     <Box flex={2} sx={{ display: { xs: "none", sm: "block" } }}>

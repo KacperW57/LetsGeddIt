@@ -156,4 +156,15 @@ recordRoutes.route("/posts/:id").get(async function (req, response) {
     });
 });
 
+//Deleting single post
+recordRoutes.route("/:id").delete((req, response) => {
+  let db_connect = dbo.getDb();
+
+  let myquery = { _id: new ObjectId(req.params.id) };
+  db_connect.collection("posts").deleteOne(myquery, function (err, obj) {
+    if (err) throw err;
+    console.log("1 post deleted");
+    response.json(obj);
+  });
+});
 module.exports = recordRoutes;

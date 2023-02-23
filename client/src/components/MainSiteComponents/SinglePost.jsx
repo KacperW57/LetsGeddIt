@@ -31,8 +31,6 @@ export default function SinglePost() {
     }
 
     getUser();
-
-    console.log(post);
   }, [myArray]);
 
   if (post === undefined) {
